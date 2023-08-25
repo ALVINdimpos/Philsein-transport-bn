@@ -1,0 +1,36 @@
+{
+  "development": {
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres",
+    "url":"postgres://philsein_transport_user:7vVGosU15Rx1IHKgzXIDG4F4FHrTNv9l@dpg-cjh3gvj37aks738dm7m0-a.oregon-postgres.render.com/philsein_transport",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false 
+      }
+    }
+
+  },
+  "test": {
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres",
+    "url":"postgres://philsein_transport_user:7vVGosU15Rx1IHKgzXIDG4F4FHrTNv9l@dpg-cjh3gvj37aks738dm7m0-a.oregon-postgres.render.com/philsein_transport",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false 
+      }
+    }
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres",
+    "url":"postgres://philsein_transport_user:7vVGosU15Rx1IHKgzXIDG4F4FHrTNv9l@dpg-cjh3gvj37aks738dm7m0-a.oregon-postgres.render.com/philsein_transport",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false 
+      }
+    }
+  }
+}
