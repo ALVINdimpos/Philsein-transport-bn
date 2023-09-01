@@ -1,26 +1,17 @@
-// models/quoteRequest.js
-
-'use strict';
+// models/quoterequest.js
 
 module.exports = (sequelize, DataTypes) => {
-  const ProjectForwardingQuoteRequest = sequelize.define('ProjectForwardingQuoteRequest', {
-    countryOfOrigin: DataTypes.STRING,
-    countryOfDestination: DataTypes.STRING,
-    cityOfOrigin: DataTypes.STRING,
-    cityOfDestination: DataTypes.STRING,
-    shipmentType: DataTypes.STRING,
-    cargoType: DataTypes.STRING,
+  const QuoteRequest = sequelize.define("QuoteRequest", {
+    destination: DataTypes.STRING,
+    packagingType: DataTypes.STRING,
+    origin: DataTypes.STRING,
     goodsDescription: DataTypes.STRING,
     name: DataTypes.STRING,
     mobile: DataTypes.STRING,
     email: DataTypes.STRING,
-    packingListData: DataTypes.BLOB, 
     companyName: DataTypes.STRING,
-    companySize: DataTypes.STRING,
-    role: DataTypes.STRING,
-    department: DataTypes.STRING,
-    remarks: DataTypes.TEXT
+    remarks: DataTypes.TEXT,
   });
 
-  return ProjectForwardingQuoteRequest;
+  return QuoteRequest;
 };
