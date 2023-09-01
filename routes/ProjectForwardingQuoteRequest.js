@@ -1,4 +1,4 @@
-const controller = require('../controllers/quoteRequest');
+const controller = require('../controllers/ProjectForwardingQuoteRequest');
 const router = require('express').Router();
 const multer = require('multer');
 
