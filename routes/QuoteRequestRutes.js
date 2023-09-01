@@ -1,10 +1,13 @@
 const controller = require("../controllers/quoteRequestController.js");
 const router = require("express").Router();
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 // all crud
 
 // Create a new quote
-router.post("/", controller.createQuoteRequest);
+router.post("/", upload.none(), controller.createQuoteRequest);
 
 // Get all quotes
 

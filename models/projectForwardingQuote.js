@@ -1,26 +1,26 @@
-// models/quoteRequest.js
+const mongoose = require('mongoose');
 
-'use strict';
+const projectForwardingQuoteRequestSchema = new mongoose.Schema({
+  countryOfOrigin: String,
+  countryOfDestination: String,
+  cityOfOrigin: String,
+  cityOfDestination: String,
+  shipmentType: String,
+  cargoType: String,
+  goodsDescription: String,
+  name: String,
+  mobile: String,
+  email: String,
+  packingListData: String,
+  companyName: String,
+  companySize: String,
+  role: String,
+  department: String,
+  remarks: String
+}, {
+  timestamps: true
+});
 
-module.exports = (sequelize, DataTypes) => {
-  const ProjectForwardingQuoteRequest = sequelize.define('ProjectForwardingQuoteRequest', {
-    countryOfOrigin: DataTypes.STRING,
-    countryOfDestination: DataTypes.STRING,
-    cityOfOrigin: DataTypes.STRING,
-    cityOfDestination: DataTypes.STRING,
-    shipmentType: DataTypes.STRING,
-    cargoType: DataTypes.STRING,
-    goodsDescription: DataTypes.STRING,
-    name: DataTypes.STRING,
-    mobile: DataTypes.STRING,
-    email: DataTypes.STRING,
-    packingListData: DataTypes.BLOB, 
-    companyName: DataTypes.STRING,
-    companySize: DataTypes.STRING,
-    role: DataTypes.STRING,
-    department: DataTypes.STRING,
-    remarks: DataTypes.TEXT
-  });
+const ProjectForwardingQuoteRequest = mongoose.model('ProjectForwardingQuoteRequest', projectForwardingQuoteRequestSchema);
 
-  return ProjectForwardingQuoteRequest;
-};
+module.exports = ProjectForwardingQuoteRequest;

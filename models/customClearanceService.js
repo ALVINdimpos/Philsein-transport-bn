@@ -1,27 +1,18 @@
-'use strict';
-const { Model } = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class CustomClearanceService extends Model {
-    static associate(models) {
-      // Define associations here if needed
-    }
-  }
-  CustomClearanceService.init(
-    {
-      customsAuthority: DataTypes.STRING,
-      valueOfCargoInUSD: DataTypes.DECIMAL(10, 2),
-      cargoType: DataTypes.STRING,
-      goodsDescription: DataTypes.TEXT,
-      name: DataTypes.STRING,
-      mobile: DataTypes.STRING,
-      email: DataTypes.STRING,
-      uploadPackingList: DataTypes.BLOB,
-      remarks: DataTypes.TEXT
-    },
-    {
-      sequelize,
-      modelName: 'CustomClearanceService'
-    }
-  );
-  return CustomClearanceService;
-};
+const mongoose = require('mongoose');
+
+const customClearanceServiceSchema = new mongoose.Schema({
+  customsAuthority: String,
+  valueOfCargoInUSD: String,
+  goodsDescription: String,
+  name: String,
+  mobile: String,
+  email: String,
+  uploadPackingList: String,
+  remarks: String
+}, {
+  timestamps: true
+});
+
+const CustomClearanceService = mongoose.model('CustomClearanceService', customClearanceServiceSchema);
+
+module.exports = CustomClearanceService;

@@ -1,9 +1,9 @@
-const db = require("../models/index");
+const ProjectForwardingQuoteRequest = require('../models/projectForwardingQuote');
 
-// Get all ProjectForwardingQuoteRequest
+// Get all ProjectForwardingQuoteRequests
 exports.getProjectForwardingQuoteRequests = async (req, res, next) => {
   try {
-    const quoteRequests = await db.ProjectForwardingQuoteRequest.findAll();
+    const quoteRequests = await ProjectForwardingQuoteRequest.find();
     res.status(200).json({ quoteRequests });
   } catch (err) {
     console.error(err);
@@ -12,37 +12,38 @@ exports.getProjectForwardingQuoteRequests = async (req, res, next) => {
 };
 
 // Create a new Quote Request
-exports.createQProjectForwardingQuoteRequest = (req, res, next) => {
-  const host = req.hostname;
-  const filePath = req.protocol + "://" + host + '/' + req?.file?.path;
-  req.body = { ...req.body, packingListData: filePath }; // Remove the square brackets
-  const projectForwardingQuoteRequest = new db.ProjectForwardingQuoteRequest({
-      ...req.body,
+exports.createProjectForwardingQuoteRequest = (req, res, next) => {
+  const filePath = "www.kagaba.live" + '/uploads/' + req?.file_name;
+  req.body = { ...req.body, packingListData: filePath };
+  const projectForwardingQuoteRequest = new ProjectForwardingQuoteRequest({
+    ...req.body,
   });
-  projectForwardingQuoteRequest.save()
-      .then(result => {
-          res.status(201).json({
-              message: 'ProjectForwardingQuoteRequest created successfully!',
-              projectForwardingQuoteRequest: result
-          });
-      })
-      .catch(err => {
-          console.log(err);
-          res.status(500).json({
-              message: 'An error occurred while creating the ProjectForwardingQuoteRequest.'
-          });
+
+  projectForwardingQuoteRequest
+    .save()
+    .then((result) => {
+      res.status(200).json({
+        message: 'ProjectForwardingQuoteRequest created successfully!',
+        projectForwardingQuoteRequest: result,
       });
-}
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({
+        message: 'An error occurred while creating the ProjectForwardingQuoteRequest.',
+      });
+    });
+};
 
 // Delete Quote Request by Id
 exports.deleteProjectForwardingQuoteRequest = async (req, res, next) => {
   const quoteRequestId = req.params.quoteRequestId;
   try {
-    const quoteRequest = await db.ProjectForwardingQuoteRequest.findByPk(quoteRequestId);
+    const quoteRequest = await ProjectForwardingQuoteRequest.findById(quoteRequestId);
     if (!quoteRequest) {
       return res.status(404).json({ message: "Quote Request not found!" });
     }
-    await quoteRequest.destroy();
+    await quoteRequest.remove();
     console.log("Quote Request Deleted!");
     res.status(200).json({ message: "Quote Request deleted successfully!" });
   } catch (err) {

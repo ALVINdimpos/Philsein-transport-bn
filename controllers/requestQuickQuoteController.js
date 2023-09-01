@@ -1,11 +1,11 @@
-// Import the Sequelize model
-const db = require("../models/index");
-const Quote = db.Quote;
+const Quote = require('../models/requestQuickQuote');
+
 // Create a new quote
 async function createQuote(req, res) {
   try {
-    const quote = await Quote.create(req.body);
-    res.status(201).json(quote);
+    const quote = new Quote(req.body);
+    await quote.save();
+    res.status(200).json(quote);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
@@ -15,7 +15,7 @@ async function createQuote(req, res) {
 // Retrieve all quotes
 async function getAllQuotes(req, res) {
   try {
-    const quotes = await Quote.findAll();
+    const quotes = await Quote.find();
     res.json(quotes);
   } catch (error) {
     console.error(error);
@@ -28,7 +28,7 @@ async function getQuoteById(req, res) {
   const quoteId = req.params.id;
 
   try {
-    const quote = await Quote.findByPk(quoteId);
+    const quote = await Quote.findById(quoteId);
 
     if (!quote) {
       return res.status(404).json({ error: "Quote not found" });
@@ -46,11 +46,13 @@ async function updateQuote(req, res) {
   const quoteId = req.params.id;
 
   try {
-    const [updatedCount] = await Quote.update(req.body, {
-      where: { id: quoteId },
-    });
+    const updatedQuote = await Quote.findByIdAndUpdate(
+      quoteId,
+      req.body,
+      { new: true }
+    );
 
-    if (updatedCount === 0) {
+    if (!updatedQuote) {
       return res.status(404).json({ error: "Quote not found" });
     }
 
@@ -66,11 +68,9 @@ async function deleteQuote(req, res) {
   const quoteId = req.params.id;
 
   try {
-    const deletedCount = await Quote.destroy({
-      where: { id: quoteId },
-    });
+    const deletedQuote = await Quote.findByIdAndRemove(quoteId);
 
-    if (deletedCount === 0) {
+    if (!deletedQuote) {
       return res.status(404).json({ error: "Quote not found" });
     }
 

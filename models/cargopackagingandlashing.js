@@ -1,11 +1,15 @@
-module.exports = (sequelize, DataTypes) => {
-  const CargoPackagingAndLashing = sequelize.define('CargoPackagingAndLashing', {
-    goodsDescription: DataTypes.TEXT,
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    mobile: DataTypes.STRING,
-    remarks: DataTypes.TEXT,
-  });
+const mongoose = require('mongoose');
 
-  return CargoPackagingAndLashing;
-};
+const cargoPackagingAndLashingSchema = new mongoose.Schema({
+  goodsDescription: String,
+  name: String,
+  email: String,
+  mobile: String,
+  remarks: String
+}, {
+  timestamps: true
+});
+
+const CargoPackagingAndLashing = mongoose.model('CargoPackagingAndLashing', cargoPackagingAndLashingSchema);
+
+module.exports = CargoPackagingAndLashing;

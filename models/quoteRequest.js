@@ -1,17 +1,19 @@
-// models/quoterequest.js
+const mongoose = require('mongoose');
 
-module.exports = (sequelize, DataTypes) => {
-  const QuoteRequest = sequelize.define("QuoteRequest", {
-    destination: DataTypes.STRING,
-    packagingType: DataTypes.STRING,
-    origin: DataTypes.STRING,
-    goodsDescription: DataTypes.STRING,
-    name: DataTypes.STRING,
-    mobile: DataTypes.STRING,
-    email: DataTypes.STRING,
-    companyName: DataTypes.STRING,
-    remarks: DataTypes.TEXT,
-  });
+const quoteRequestSchema = new mongoose.Schema({
+  destination: String,
+  packagingType: String,
+  origin: String,
+  goodsDescription: String,
+  name: String,
+  mobile: String,
+  email: String,
+  companyName: String,
+  remarks: String
+}, {
+  timestamps: true
+});
 
-  return QuoteRequest;
-};
+const QuoteRequest = mongoose.model('QuoteRequest', quoteRequestSchema);
+
+module.exports = QuoteRequest;
