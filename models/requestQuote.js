@@ -1,7 +1,7 @@
 // models/quoterequest.js
 
 module.exports = (sequelize, DataTypes) => {
-  const QuoteRequest = sequelize.define("QuoteRequest", {
+  const QuoteRequests = sequelize.define("QuoteRequests", {
     destination: DataTypes.STRING,
     packagingType: DataTypes.STRING,
     origin: DataTypes.STRING,
@@ -13,5 +13,5 @@ module.exports = (sequelize, DataTypes) => {
     remarks: DataTypes.TEXT,
   });
 
-  return QuoteRequest;
+  return QuoteRequests;
 };

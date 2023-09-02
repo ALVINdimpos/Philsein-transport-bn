@@ -1,5 +1,5 @@
 const db = require("../models/index");
-const QuoteRequest = db.QuoteRequest;
+const QuoteRequest = db.QuoteRequests;
 // Create a new quote request
 async function createQuoteRequest(req, res) {
   try {
